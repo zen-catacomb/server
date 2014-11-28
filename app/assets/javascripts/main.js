@@ -86,7 +86,7 @@ var humidityCurve = $("#humidityCurve").epoch({
   axes: ['left'],
   data: [{
     label: "Humidity",
-    values: [{time: Date.now, y: 0.3}]
+    values: [{time: Date.now, y: 35}]
   }]
 });
 

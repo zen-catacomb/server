@@ -27,13 +27,13 @@ div#_canvas_css_reference svg {
 .epoch .axis line {
   fill: none;
   stroke: #fff;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 .epoch .axis .tick text {
   font-size: 6pt;
   font-weight: lighter;
   stroke: #fff;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 .epoch .line {
   fill: none;
@@ -115,9 +115,11 @@ div#_canvas_css_reference svg {
 .epoch.category10 div.ref.category1 {
   background-color: #1f77b4;
 }
-.epoch .category1 .line,
-.epoch.category10 .category1 .line {
+.epoch .temperature .line {
   stroke: #ff987a;
+}
+.epoch .humidity .line {
+  stroke: #bc8bf1;
 }
 .epoch .category1 .area,
 .epoch .category1 .dot,
@@ -1384,12 +1386,13 @@ div#_canvas_css_reference svg {
 .epoch-theme-dark .epoch .axis path,
 .epoch-theme-dark .epoch .axis line {
   stroke: #fff;
-  opacity: 0.5;
+  opacity: 0.4;
 }
 .epoch-theme-dark .epoch .axis .tick text {
   fill: #fff;
-  opacity: 0.5;
+  opacity: 0.4;
 }
+/* bc8bf1 */
 .epoch-theme-dark .arc.pie {
   stroke: #333;
 }
