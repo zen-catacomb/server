@@ -10,6 +10,8 @@ html, body {
 h1, h2 {
   color: #fff;
   opacity: 1;
+  padding: 0;
+  margin: 0;
 }
 
 .description {
@@ -33,12 +35,17 @@ h1, h2 {
   
   #main {
     #left {
+      h1 {
+        margin-bottom: 50px;
+      }
       width: 200px;
       float: left;
 
       section {
+        margin-bottom: 40px;
         header {
-
+          padding-bottom: 8px;
+          border-bottom: 1px solid rgba(255,255,255,0.5);
         }
         .description {
 
@@ -51,6 +58,12 @@ h1, h2 {
     #right {
       float: left;
       width: 800px;
+
+      #decibelBar {
+        width: 10px;
+        height: 375px;
+        background: red;
+      }
       
       section {
         header {

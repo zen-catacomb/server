@@ -1,22 +1,22 @@
 
 var sensors = {
   "light": function (state) {
-    console.log(state ? "light on" : "light off");
+    $("#lightValue")
+      .text(state ? "ON" : "OFF")
+      .attr("class", "value "+(!!state));
   },
   "humidity": function (value) {
-    console.log("humidity = " + value);
   },
   "temperature": function (value) {
-    console.log("temperature = " + value);
+    $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
-    console.log("sound = " + value);
   }
 };
 
 function MOCK () {
   setInterval(function () {
-    $.post("/light/"+(Math.random() > 0.3));
+    $.post("/light/"+(Math.random() > 0.3 ? 1 : 0));
     $.post("/humidity/"+Math.floor(Math.random() * 100));
     $.post("/temperature/"+Math.floor(15 + Math.random() * 10));
     $.post("/sound/"+Math.floor(15 + Math.random() * 40));
@@ -30,6 +30,7 @@ function connect () {
 
   source.addEventListener('message', function(e) {
     var json = JSON.parse(e.data);
+    console.log(json);
     for (var key in json)
       if (key in sensors)
         sensors[key](json[key]);
