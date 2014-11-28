@@ -36,7 +36,7 @@ function MOCK () {
 ////////// Connect and handle the Stream ///////
 
 function connect () {
-  var source = new EventSource("http://zen-catacomb.herokuapp.com/stream");
+  var source = new EventSource("/stream");
 
   source.addEventListener('message', function(e) {
     var json = JSON.parse(e.data);
