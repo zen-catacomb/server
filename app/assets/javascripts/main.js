@@ -6,6 +6,7 @@ var sensors = {
       .attr("class", "value "+(!!state));
   },
   "humidity": function (value) {
+    humidityCurve.push([{time: Date.now(), y: value}]);
   },
   "temperature": function (value) {
     temperatureCurve.push([{time: Date.now(), y: value}]);
@@ -27,7 +28,7 @@ function MOCK () {
 ////////// Connect and handle the Stream ///////
 
 function connect () {
-  var source = new EventSource("/stream");
+  var source = new EventSource("http://zen-catacomb.herokuapp.com/stream");
 
   source.addEventListener('message', function(e) {
     var json = JSON.parse(e.data);
@@ -51,15 +52,25 @@ function connect () {
 
 
 // init charts
-  var temperatureCurve = $('#temperatureCurve').epoch({
-    type: 'time.line',
-    ticks: 5,
-    axes: ['left', 'bottom'],
-    data: [{
-      label: "Temperature",
-      values: [{time: Date.now, y: 0}]
-    }]
-  });
+var temperatureCurve = $('#temperatureCurve').epoch({
+  type: 'time.line',
+  ticks: 5,
+  axes: ['left'],
+  data: [{
+    label: "Temperature",
+    values: [{time: Date.now, y: 0}]
+  }]
+});
+
+var humidityCurve = $("#humidityCurve").epoch({
+  type: 'time.line',
+  ticks: 5,
+  axes: ['left'],
+  data: [{
+    label: "Humidity",
+    values: [{time: Date.now, y: 0}]
+  }]
+});
 
 
 connect();
