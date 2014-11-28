@@ -1,10 +1,14 @@
 html, body {
   font-family: 'Nunito', sans-serif;
-  background: #333;
   color: #fff;
   margin: 0;
   padding: 0;
   font-weight: 300;
+  background-image: -o-linear-gradient(134deg, #3E468D 0%, #1C2363 100%);
+  background-image: -moz-linear-gradient(134deg, #3E468D 0%, #1C2363 100%);
+  background-image: -ms-linear-gradient(134deg, #3E468D 0%, #1C2363 100%);
+  background-image: linear-gradient(224deg, #3E468D 0%, #1C2363 100%);
+  height: 100%;
 }
 
 * {
@@ -25,14 +29,17 @@ p {
 #wrapper {
   width: 1440px;
   margin: 0 auto;
-  padding: 40px;
   
   #main {
+    padding-top: 40px;
+    padding-left: 40px;
     margin-bottom: 30px;
     overflow: auto;
     #left {
       h1 {
         margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 2.0em;
       }
       width: 200px;
       float: left;
@@ -42,11 +49,13 @@ p {
         header {
           padding-bottom: 8px;
           border-bottom: 1px solid rgba(255,255,255,0.5);
+          font-size: 0.9em;
         }
         .description {
           opacity: 0.5;
-          font-size: 0.7em;
+          font-size: 0.6em;
           margin-bottom: 5px;
+          margin-top: 8px;
         }
 
         .value {
@@ -66,7 +75,6 @@ p {
       #soundBar {
         width: 10px;
         height: 375px;
-        background: red;
         margin-top: 4px;
         margin-left: 50px;
         float: left;
@@ -87,6 +95,10 @@ p {
   }
   #extra {
     clear: both;
+    background: #242C70;
+    overflow: auto;
+    padding-left: 40px;
+    padding-bottom: 40px;
 
     #temperatureCurve {
       width: 400px;
@@ -103,7 +115,7 @@ p {
       height: 230px;
       padding: 20px;
       margin: 20px 10px;
-      background: rgba(255,255,255,0.1);
+      background: #333B80;
       header {
 
       }
