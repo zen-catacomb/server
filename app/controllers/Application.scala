@@ -43,6 +43,11 @@ object Application extends Controller {
     Ok
   }
 
+  def touch() = Action {
+    push("touch", value)
+    Ok
+  }
+
   def stream = Action {
     Ok.chunked(
       events &> EventSource()
