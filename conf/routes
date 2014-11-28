@@ -10,7 +10,7 @@ POST    /light/:value               controllers.Application.light(value: Int)
 POST    /humidity/:value            controllers.Application.humidity(value: Int)
 POST    /temperature/:value         controllers.Application.temperature(value: Int)
 POST    /sound/:value               controllers.Application.sound(value: Int)
-POST    /sound/                     controllers.Application.touch()
+POST    /touch                      controllers.Application.touch()
 
 # HTTP API
 GET     /get/:key                   controllers.Application.get(key: String)
