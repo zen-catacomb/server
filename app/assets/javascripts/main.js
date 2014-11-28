@@ -48,6 +48,26 @@ function MOCK () {
   }, 1000);
 }
 
+/*
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+var C = window.AudioContext || window.webkitAudioContext;
+var ctx = new C();
+
+navigator.getUserMedia({ audio: true }, function (stream) {
+  var mic = ctx.createMediaStreamSource(stream);
+  var gain = ctx.createGain();
+  gain.gain.value = 10;
+  var compr = ctx.createDynamicsCompressor();
+  mic.connect(gain);
+  gain.connect(compr);
+
+  var array = new Uint8Array(16);
+  var analyzer = ctx.createAnalyser();
+  
+}, function () {});
+*/
+
+
 ////////// Connect and handle the Stream ///////
 
 function connect () {
