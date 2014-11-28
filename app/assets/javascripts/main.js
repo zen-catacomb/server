@@ -33,6 +33,10 @@ function notifyMe() {
   // want to be respectful there is no need to bother them any more.
 }
 
+var lastSoundSecondTick = 0;
+var nbSound = 0;
+var nbSoundSamples = 0;
+
 var sensors = {
   "light": function (state) {
     if (state > 0)
@@ -60,12 +64,21 @@ var sensors = {
     $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
-    if (value > 0) {
+    ++nbSoundSamples;
+    if (value) {
+      ++nbSound;
       lastSound = Date.now();
     }
-    var percent = value;
-    $("#soundBarValue").css("height", (100*percent)+"%");
-    soundCurve.push([{ time: Date.now(), y: value }]);
+
+    if (lastSoundSecondTick < Date.now()-1000) {
+      lastSoundSecondTick = Date.now();
+      var percent = nbSound / nbSoundSamples;
+      nbSound = 0;
+      nbSoundSamples = 0;
+      soundCurve.push([{ time: Date.now(), y: percent }]);
+    }
+
+    $("#soundBarValue").css("height", (100*value)+"%");
   },
   "touch": function(v) {
     notifyMe();
