@@ -79,6 +79,7 @@ var temperatureCurve = $('#temperatureCurve').epoch({
   type: 'time.line',
   ticks: {left:4},
   axes: ['left'],
+  historySize: 120,
   data: [{
     label: "Temperature",
     values: [{time: Date.now, y: 20}]
@@ -89,9 +90,10 @@ var humidityCurve = $("#humidityCurve").epoch({
   type: 'time.line',
   ticks: {left:4},
   axes: ['left'],
+  historySize: 120,
   data: [{
     label: "Humidity",
-    values: [{time: Date.now, y: 35}]
+    values: [{time: Date.now, y: 0.35}]
   }]
 });
 
