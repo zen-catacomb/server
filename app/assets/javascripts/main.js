@@ -2,8 +2,16 @@
 var sensors = {
   "light": function (state) {
     $("#lightValue")
-      .text(state ? "ON" : "OFF")
+      .text(state ? "PLAYING" : "DEAD")
       .attr("class", "value "+(!!state));
+
+    $("#lightIcon")
+     .html(
+       state ?
+       '<i id="lightIconOn" class="icon" data-icon="c"></i>'
+       :
+       '<i id="lightIconOff" class="icon" data-icon="j"></i>'
+     );
   },
   "humidity": function (value) {
     humidityCurve.push([{time: Date.now(), y: value}]);
@@ -28,7 +36,7 @@ function MOCK () {
 ////////// Connect and handle the Stream ///////
 
 function connect () {
-  var source = new EventSource("/stream");
+  var source = new EventSource("http://zen-catacomb.herokuapp.com/stream");
 
   source.addEventListener('message', function(e) {
     var json = JSON.parse(e.data);
