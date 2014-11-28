@@ -21,9 +21,12 @@ var sensors = {
     $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
+    var percent = value;
+    $("#soundBarValue").css("height", (100*percent)+"%");
   }
 };
 
+/*
 function MOCK () {
   setInterval(function () {
     $.post("/light/"+(Math.random() > 0.3 ? 1 : 0));
@@ -32,6 +35,7 @@ function MOCK () {
     $.post("/sound/"+Math.floor(15 + Math.random() * 40));
   }, 1000);
 }
+*/
 
 ////////// Connect and handle the Stream ///////
 
