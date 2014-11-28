@@ -8,6 +8,9 @@ var sensors = {
   },
   "temperature": function (value) {
     console.log("temperature = " + value);
+  },
+  "sound": function (value) {
+    console.log("sound = " + value);
   }
 };
 
@@ -16,6 +19,7 @@ function MOCK () {
     $.post("/light/"+(Math.random() > 0.3));
     $.post("/humidity/"+Math.floor(Math.random() * 100));
     $.post("/temperature/"+Math.floor(15 + Math.random() * 10));
+    $.post("/sound/"+Math.floor(15 + Math.random() * 40));
   }, 1000);
 }
 

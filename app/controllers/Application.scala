@@ -14,8 +14,8 @@ object Application extends Controller {
 
   val (events, channel) = Concurrent.broadcast[JsValue]
 
-  def light(state: Boolean) = Action {
-    channel.push(Json.obj("light" -> state))
+  def light(state: Int) = Action {
+    channel.push(Json.obj("light" -> (state == 0)))
     Ok
   }
 
@@ -28,7 +28,13 @@ object Application extends Controller {
 
   def temperature(value: Int) = Action {
     channel.push(Json.obj("temperature" -> value))
-    Ok }
+    Ok
+  }
+
+  def sound(value: Int) = Action {
+    channel.push(Json.obj("sound" -> value))
+    Ok
+  }
 
   def stream = Action {
     Ok.chunked(
