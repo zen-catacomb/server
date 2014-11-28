@@ -4,6 +4,35 @@ var LAST_SOUND_WINDOW = 10 * 1000;
 var LAST_LIGHT_ON_WINDOW = 10 * 1000;
 var lastLightOn = 0;
 
+function notifyMe() {
+  var msg = "We need more players! Bring your arse downstairs :)";
+  // Let's check if the browser supports notifications
+  if (!("Notification" in window)) {
+    alert("This browser does not support desktop notification");
+  }
+
+  // Let's check if the user is okay to get some notification
+  else if (Notification.permission === "granted") {
+    // If it's okay let's create a notification
+    var notification = new Notification(msg);
+  }
+
+  // Otherwise, we need to ask the user for permission
+  // Note, Chrome does not implement the permission static property
+  // So we have to check for NOT 'denied' instead of 'default'
+  else if (Notification.permission !== 'denied') {
+    Notification.requestPermission(function (permission) {
+      // If the user is okay, let's create a notification
+      if (permission === "granted") {
+        var notification = new Notification(msg);
+      }
+    });
+  }
+
+  // At last, if the user already denied any notification, and you 
+  // want to be respectful there is no need to bother them any more.
+}
+
 var sensors = {
   "light": function (state) {
     if (state > 0)
@@ -37,6 +66,9 @@ var sensors = {
     var percent = value;
     $("#soundBarValue").css("height", (100*percent)+"%");
     soundCurve.push([{ time: Date.now(), y: value }]);
+  },
+  "touch": function(v) {
+    notifyMe();
   }
 };
 
