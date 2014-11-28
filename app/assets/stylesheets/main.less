@@ -7,73 +7,76 @@ html, body {
   font-weight: 300;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 h1, h2 {
   color: #fff;
   opacity: 1;
   padding: 0;
   margin: 0;
 }
-
-.description {
-  opacity: 0.5;
-  font-size: 0.7em;
-}
-
-.value {
-  font-size: 4em;
-  font-weight: bold;
-}
-
-.value:before {
-  
+p {
+  padding: 0;
+  margin: 0;
 }
 
 #wrapper {
   width: 1440px;
   margin: 0 auto;
   padding: 40px;
-  box-sizing: border-box;
   
   #main {
+    margin-bottom: 30px;
+    overflow: auto;
     #left {
       h1 {
-        margin-bottom: 70px;
+        margin-bottom: 30px;
       }
       width: 200px;
       float: left;
 
       section {
-        margin-bottom: 40px;
+        margin-top: 40px;
         header {
           padding-bottom: 8px;
           border-bottom: 1px solid rgba(255,255,255,0.5);
         }
         .description {
-
+          opacity: 0.5;
+          font-size: 0.7em;
+          margin-bottom: 5px;
         }
+
         .value {
-
+          font-size: 3.5em;
+          font-weight: bold;
         }
+
+        .value:before {
+          
+        }
+
       }
     }
     #right {
-      float: left;
-      width: 800px;
-      margin-top: 20px;
+      margin-top: 16px;
 
       #soundBar {
         width: 10px;
         height: 375px;
         background: red;
+        margin-top: 4px;
         margin-left: 50px;
         float: left;
       }
       
       section {
-        margin-left: 20px;
+        margin-left: 40px;
         float: left;
         #soundCurve {
-          width: 600px;
+          width: 1050px;
           height: 350px;
         }
         header {
@@ -96,14 +99,18 @@ h1, h2 {
 
     section {
       float: left;
-      width: 300px;
-      height: 200px;
-      padding: 10px;
-      margin: 10px;
-      background: rgba(255,255,255,0.5);
+      width: 520px;
+      height: 230px;
+      padding: 20px;
+      margin: 20px 10px;
+      background: rgba(255,255,255,0.1);
       header {
 
       }
+    }
+
+    section:first-child {
+      width: 260px;
     }
   }
 }
