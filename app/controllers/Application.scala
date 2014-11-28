@@ -46,7 +46,7 @@ object Application extends Controller {
   def stream = Action {
     Ok.chunked(
       events &> EventSource()
-    ) as "text/event-stream"
+    ).withHeaders("Access-Control-Allow-Origin" -> "*") as "text/event-stream"
   }
 
   def get(key: String) = Action {
