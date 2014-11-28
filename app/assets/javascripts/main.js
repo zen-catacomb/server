@@ -1,9 +1,14 @@
 
+var lastSound = 0;
+var LAST_SOUND_WINDOW = 10 * 1000;
+
 var sensors = {
   "light": function (state) {
+    var playing = state && lastSound > Date.now() - LAST_SOUND_WINDOW;
+
     $("#lightValue")
-      .text(state ? "PLAYING" : "DEAD")
-      .attr("class", "value "+(!!state));
+      .text(playing ? "PLAYING" : "DEAD")
+      .attr("class", "value "+(!!playing));
 
     $("#lightIcon")
      .html(
@@ -21,6 +26,9 @@ var sensors = {
     $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
+    if (value > 0) {
+      lastSound = Date.now();
+    }
     var percent = value;
     $("#soundBarValue").css("height", (100*percent)+"%");
   }
