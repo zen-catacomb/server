@@ -97,5 +97,9 @@ var humidityCurve = $("#humidityCurve").epoch({
   }]
 });
 
+if (location.hash == "#munin") {
+  document.querySelector(".munin").style.display = 'block';
+}
+
 
 connect();
