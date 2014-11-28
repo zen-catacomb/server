@@ -3,14 +3,57 @@
 @main("Catacomb") {
 
   <div id="wrapper">
+
     <div id="main">
       <aside id="left">
-        
+        <h1>catacomb</h1>
+        <section>
+          <header>
+            Partie en cours
+          </header>
+          <div class="description">
+            Calculé grâce au détecteur de lumière.
+          </div>
+          <div id="lightValue" class="value">
+            ?
+          </div>
+        </section>
+        <section>
+          <header>
+            Température de la pièce
+          </header>
+          <div class="description">
+            Calculé l'activité ressentie dans la pièce.
+          </div>
+          <div id="temperatureValue" class="value">
+            ?
+          </div>
+        </section>
       </aside>
-      <section id="maincurve">
-        
+      <div id="right">
+        <div id="decibelBar"></div>
+        <section>
+          <header>Courbe du son en decibel</header>
+          <div id="decibelCurve"></div>
+        </section>
+      </div>
+    </div>
+
+    <div id="extra">
+      <section>
+        <header>Température</header>
+        <div id="temperatureCurve"></div>
+      </section>
+      <section>
+        <header>Lumière</header>
+        <div id="lightCurve"></div>
+      </section>
+      <section>
+        <header>Humidité</header>
+        <div id="humidityCurve"></div>
       </section>
     </div>
+
   </div>
 
   <script src="@routes.Assets.at("jquery-2.1.1.min.js")"></script>
