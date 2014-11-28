@@ -36,6 +36,7 @@ var sensors = {
     }
     var percent = value;
     $("#soundBarValue").css("height", (100*percent)+"%");
+    soundCurve.push([{ time: Date.now(), y: value }]);
   }
 };
 
@@ -47,6 +48,26 @@ function MOCK () {
     $.post("/sound/"+(Math.random() > 0.8 ? 1 : 0));
   }, 1000);
 }
+
+/*
+navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
+var C = window.AudioContext || window.webkitAudioContext;
+var ctx = new C();
+
+navigator.getUserMedia({ audio: true }, function (stream) {
+  var mic = ctx.createMediaStreamSource(stream);
+  var gain = ctx.createGain();
+  gain.gain.value = 10;
+  var compr = ctx.createDynamicsCompressor();
+  mic.connect(gain);
+  gain.connect(compr);
+
+  var array = new Uint8Array(16);
+  var analyzer = ctx.createAnalyser();
+  
+}, function () {});
+*/
+
 
 ////////// Connect and handle the Stream ///////
 
@@ -97,9 +118,19 @@ var humidityCurve = $("#humidityCurve").epoch({
   }]
 });
 
+var soundCurve = $("#soundCurve").epoch({
+  type: 'time.line',
+  ticks: {left:4},
+  axes: ['left'],
+  historySize: 120,
+  data: [{
+    label: "Sound level",
+    values: [{time: Date.now, y: 0 }]
+  }]
+});
+
 if (location.hash == "#munin") {
   document.querySelector(".munin").style.display = 'block';
 }
-
 
 connect();
