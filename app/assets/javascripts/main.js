@@ -27,7 +27,7 @@ function MOCK () {
 ////////// Connect and handle the Stream ///////
 
 function connect () {
-  var source = new EventSource("http://zen-catacomb.herokuapp.com/stream");
+  var source = new EventSource("/stream");
 
   source.addEventListener('message', function(e) {
     var json = JSON.parse(e.data);
@@ -53,7 +53,7 @@ function connect () {
 // init charts
   var temperatureCurve = $('#temperatureCurve').epoch({
     type: 'time.line',
-    ticks: 20,
+    ticks: 5,
     axes: ['left', 'bottom'],
     data: [{
       label: "Temperature",
