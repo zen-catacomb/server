@@ -11,6 +11,9 @@ POST    /humidity/:value            controllers.Application.humidity(value: Int)
 POST    /temperature/:value         controllers.Application.temperature(value: Int)
 POST    /sound/:value               controllers.Application.sound(value: Int)
 
+# HTTP API
+GET     /get/:key                   controllers.Application.get(key: String)
+
 GET     /stream                     controllers.Application.stream
 
 # Map static resources from the /public folder to the /assets URL path
