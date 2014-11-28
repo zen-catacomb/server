@@ -36,6 +36,7 @@ var sensors = {
     }
     var percent = value;
     $("#soundBarValue").css("height", (100*percent)+"%");
+    soundCurve.push([{ time: Date.now(), y: value }]);
   }
 };
 
@@ -117,5 +118,15 @@ var humidityCurve = $("#humidityCurve").epoch({
   }]
 });
 
+var soundCurve = $("#soundCurve").epoch({
+  type: 'time.line',
+  ticks: {left:4},
+  axes: ['left'],
+  historySize: 120,
+  data: [{
+    label: "Sound level",
+    values: [{time: Date.now, y: 0 }]
+  }]
+});
 
 connect();

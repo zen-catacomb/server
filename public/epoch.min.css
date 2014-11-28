@@ -121,6 +121,10 @@ div#_canvas_css_reference svg {
 .epoch .humidity .line {
   stroke: #bc8bf1;
 }
+.epoch.sound .line {
+  stroke: #FFC878;
+}
+
 .epoch .category1 .area,
 .epoch .category1 .dot,
 .epoch.category10 .category1 .area,
