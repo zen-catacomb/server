@@ -15,7 +15,7 @@ object Application extends Controller {
   val (events, channel) = Concurrent.broadcast[JsValue]
 
   def light(state: Int) = Action {
-    channel.push(Json.obj("light" -> (state == 0)))
+    channel.push(Json.obj("light" -> (state == 1)))
     Ok
   }
 
