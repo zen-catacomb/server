@@ -28,7 +28,13 @@ object Application extends Controller {
 
   def temperature(value: Int) = Action {
     channel.push(Json.obj("temperature" -> value))
-    Ok }
+    Ok
+  }
+
+  def sound(value: Int) = Action {
+    channel.push(Json.obj("sound" -> value))
+    Ok
+  }
 
   def stream = Action {
     Ok.chunked(
