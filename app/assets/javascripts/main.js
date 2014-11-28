@@ -4,6 +4,13 @@ var sensors = {
     $("#lightValue")
       .text(state ? "ON" : "OFF")
       .attr("class", "value "+(!!state));
+    $("#lightIcon")
+      .html(
+        state ?
+        '<i id="lightIconOn" class="icon" data-icon="c"></i>'
+        :
+        '<i id="lightIconOff" class="icon" data-icon="j"></i>'
+      );
   },
   "humidity": function (value) {
   },

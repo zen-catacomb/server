@@ -15,7 +15,7 @@
             Calculé grâce au détecteur de lumière.
           </p>
           <div id="lightValue" class="value">
-            ?
+            …
           </div>
         </section>
         <section>
@@ -25,8 +25,9 @@
           <p class="description">
             Calculé l'activité ressentie dans la pièce.
           </p>
-          <div id="temperatureValue" class="value">
-            ?
+          <div class="value">
+            <i class="icon" data-icon="d"></i>
+            <span id="temperatureValue">…</span>
           </div>
         </section>
       </aside>
@@ -41,15 +42,26 @@
 
     <div id="extra">
       <section>
-        <header>Light</header>
-        <div id="lightIcon"></div>
+        <header>
+          <i style="color:#66C26C" class="icon" data-icon="e"></i>
+          Light
+        </header>
+        <div id="lightIcon">
+          …
+        </div>
       </section>
       <section>
-        <header>Temperature</header>
+        <header>
+          <i style="color:#FF987A" class="icon" data-icon="e"></i>
+          Temperature
+        </header>
         <div id="temperatureCurve"></div>
       </section>
       <section>
-        <header>Humidity</header>
+        <header>
+          <i style="color:#BC8BF1" class="icon" data-icon="e"></i>
+          Humidity
+        </header>
         <div id="humidityCurve"></div>
       </section>
     </div>
