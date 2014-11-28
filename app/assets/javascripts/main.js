@@ -1,10 +1,15 @@
 
 var lastSound = 0;
 var LAST_SOUND_WINDOW = 10 * 1000;
+var LAST_LIGHT_ON_WINDOW = 10 * 1000;
+var lastLightOn = 0;
 
 var sensors = {
   "light": function (state) {
-    var playing = state && lastSound > Date.now() - LAST_SOUND_WINDOW;
+    if (state > 0)
+      lastLightOn = Date.now();
+
+    var playing = lastLightOn > Date.now() - LAST_LIGHT_ON_WINDOW && lastSound > Date.now() - LAST_SOUND_WINDOW;
 
     $("#lightValue")
       .text(playing ? "PLAYING" : "DEAD")
@@ -39,7 +44,7 @@ function MOCK () {
     $.post("/light/"+(Math.random() > 0.3 ? 1 : 0));
     $.post("/humidity/"+Math.floor(Math.random() * 100));
     $.post("/temperature/"+Math.floor(15 + Math.random() * 10));
-    $.post("/sound/"+Math.floor(15 + Math.random() * 40));
+    $.post("/sound/"+(Math.random() > 0.8 ? 1 : 0));
   }, 1000);
 }
 
