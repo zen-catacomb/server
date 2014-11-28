@@ -1,22 +1,40 @@
 
+var lastSound = 0;
+var LAST_SOUND_WINDOW = 10 * 1000;
+
 var sensors = {
   "light": function (state) {
+    var playing = state && lastSound > Date.now() - LAST_SOUND_WINDOW;
+
     $("#lightValue")
-      .text(state ? "ON" : "OFF")
-      .attr("class", "value "+(!!state));
+      .text(playing ? "PLAYING" : "DEAD")
+      .attr("class", "value "+(!!playing));
+
+    $("#lightIcon")
+     .html(
+       state ?
+       '<i id="lightIconOn" class="icon" data-icon="c"></i>'
+       :
+       '<i id="lightIconOff" class="icon" data-icon="j"></i>'
+     );
   },
   "humidity": function (value) {
     humidityCurve.push([{time: Date.now(), y: value}]);
-    $("#humidityValue").text(value+"%");
   },
   "temperature": function (value) {
     temperatureCurve.push([{time: Date.now(), y: value}]);
     $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
+    if (value > 0) {
+      lastSound = Date.now();
+    }
+    var percent = value;
+    $("#soundBarValue").css("height", (100*percent)+"%");
   }
 };
 
+/*
 function MOCK () {
   setInterval(function () {
     $.post("/light/"+(Math.random() > 0.3 ? 1 : 0));
@@ -25,6 +43,7 @@ function MOCK () {
     $.post("/sound/"+Math.floor(15 + Math.random() * 40));
   }, 1000);
 }
+*/
 
 ////////// Connect and handle the Stream ///////
 
@@ -53,24 +72,25 @@ function connect () {
 
 
 // init charts
-// #ff987a
 var temperatureCurve = $('#temperatureCurve').epoch({
   type: 'time.line',
+  ticks: {left:4},
   axes: ['left'],
-  ticks: { left: 4 },
   data: [{
     label: "Temperature",
     values: [{time: Date.now, y: 20}]
   }]
 });
-var humidityCurve = $('#temperatureCurve').epoch({
+
+var humidityCurve = $("#humidityCurve").epoch({
   type: 'time.line',
+  ticks: {left:4},
   axes: ['left'],
-  ticks: { left: 4 },
   data: [{
     label: "Humidity",
     values: [{time: Date.now, y: 0.3}]
   }]
 });
+
 
 connect();
