@@ -4,17 +4,11 @@ var sensors = {
     $("#lightValue")
       .text(state ? "ON" : "OFF")
       .attr("class", "value "+(!!state));
-    $("#lightIcon")
-      .html(
-        state ?
-        '<i id="lightIconOn" class="icon" data-icon="c"></i>'
-        :
-        '<i id="lightIconOff" class="icon" data-icon="j"></i>'
-      );
   },
   "humidity": function (value) {
   },
   "temperature": function (value) {
+    temperatureCurve.push([{time: Date.now(), y: value}]);
     $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
@@ -33,14 +27,15 @@ function MOCK () {
 ////////// Connect and handle the Stream ///////
 
 function connect () {
-  var source = new EventSource("/stream");
+  var source = new EventSource("http://zen-catacomb.herokuapp.com/stream");
 
   source.addEventListener('message', function(e) {
     var json = JSON.parse(e.data);
     console.log(json);
     for (var key in json)
-      if (key in sensors)
+      if (key in sensors) {
         sensors[key](json[key]);
+      }
   }, false);
 
   source.addEventListener('open', function(e) {
@@ -53,5 +48,18 @@ function connect () {
     }
   }, false);
 }
+
+
+// init charts
+  var temperatureCurve = $('#temperatureCurve').epoch({
+    type: 'time.line',
+    ticks: 20,
+    axes: ['left', 'bottom'],
+    data: [{
+      label: "Temperature",
+      values: [{time: Date.now, y: 0}]
+    }]
+  });
+
 
 connect();
