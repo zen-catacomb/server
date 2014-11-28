@@ -44,7 +44,7 @@ object Application extends Controller {
   }
 
   def touch() = Action {
-    push("touch", value)
+    push("touch", true)
     Ok
   }
 
