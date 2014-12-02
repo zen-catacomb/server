@@ -44,6 +44,9 @@ var lastSoundSecondTick = 0;
 var nbSound = 0;
 var nbSoundSamples = 0;
 
+var temperatureSamples = [];
+var humiditySamples = [];
+
 var sensors = {
   "light": function (state) {
     if (state > 0)
@@ -64,10 +67,24 @@ var sensors = {
      );
   },
   "humidity": function (value) {
-    humidityCurve.push([{time: Date.now(), y: value}]);
+    humiditySamples.push(value);
+    if (humiditySamples.length >= 8) {
+      var mean = humiditySamples.reduce(function (a, b) {
+        return a + b;
+      }) / humiditySamples.length;
+      humidityCurve.push([{ time: Date.now(), y: mean }]);
+      humiditySamples = [];
+    }
   },
   "temperature": function (value) {
-    temperatureCurve.push([{time: Date.now(), y: value}]);
+    temperatureSamples.push(value);
+    if (temperatureSamples.length >= 8) {
+      var mean = temperatureSamples.reduce(function (a, b) {
+        return a + b;
+      }) / temperatureSamples.length;
+      temperatureCurve.push([{ time: Date.now(), y: mean }]);
+      temperatureSamples = [];
+    }
     $("#temperatureValue").text(value+"°C");
   },
   "sound": function (value) {
@@ -158,7 +175,7 @@ var temperatureCurve = $('#temperatureCurve').epoch({
   historySize: 120,
   data: [{
     label: "Temperature",
-    values: [{time: Date.now, y: 0}]
+    values: []
   }],
   range: [15,30]
 });
@@ -170,7 +187,7 @@ var humidityCurve = $("#humidityCurve").epoch({
   historySize: 120,
   data: [{
     label: "Humidity",
-    values: [{time: Date.now, y: 0}]
+    values: []
   }],
   range: [0,1]
 });
@@ -182,7 +199,7 @@ var soundCurve = $("#soundCurve").epoch({
   historySize: 120,
   data: [{
     label: "Sound level",
-    values: [{time: Date.now, y: 0 }]
+    values: []
   }],
   range: [0,1]
 });
