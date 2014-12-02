@@ -4,7 +4,14 @@ var LAST_SOUND_WINDOW = 10 * 1000;
 var LAST_LIGHT_ON_WINDOW = 10 * 1000;
 var lastLightOn = 0;
 
+Notification.requestPermission(function (permission) {
+});
+
 function notifyMe() {
+  var audio = new Audio();
+  audio.src = "/assets/notification.wav";
+  audio.play();
+
   var msg = "We need more players! Bring your arse downstairs :)";
   // Let's check if the browser supports notifications
   if (!("Notification" in window)) {
@@ -116,6 +123,8 @@ navigator.getUserMedia({ audio: true }, function (stream) {
 
 ////////// Connect and handle the Stream ///////
 
+reconnectDelay = 1000;
+
 function connect () {
   var source = new EventSource("//zen-catacomb.herokuapp.com/stream");
 
@@ -135,6 +144,7 @@ function connect () {
   source.addEventListener('error', function(e) {
     if (e.readyState == EventSource.CLOSED) {
       // Connection was closed.
+      setTimeout(connect, reconnectDelay *= 1.3);
     }
   }, false);
 }
@@ -148,8 +158,9 @@ var temperatureCurve = $('#temperatureCurve').epoch({
   historySize: 120,
   data: [{
     label: "Temperature",
-    values: [{time: Date.now, y: 20}]
-  }]
+    values: [{time: Date.now, y: 0}]
+  }],
+  range: [15,30]
 });
 
 var humidityCurve = $("#humidityCurve").epoch({
@@ -159,8 +170,9 @@ var humidityCurve = $("#humidityCurve").epoch({
   historySize: 120,
   data: [{
     label: "Humidity",
-    values: [{time: Date.now, y: 0.35}]
-  }]
+    values: [{time: Date.now, y: 0}]
+  }],
+  range: [0,1]
 });
 
 var soundCurve = $("#soundCurve").epoch({
@@ -171,7 +183,8 @@ var soundCurve = $("#soundCurve").epoch({
   data: [{
     label: "Sound level",
     values: [{time: Date.now, y: 0 }]
-  }]
+  }],
+  range: [0,1]
 });
 
 if (location.hash == "#munin") {
