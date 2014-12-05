@@ -45,6 +45,7 @@ object Application extends Controller {
 
   def touch() = Action {
     push("touch", true)
+    lastSeen += ("touch" -> scala.util.Random.nextInt())
     Ok
   }
 
